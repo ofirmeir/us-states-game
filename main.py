@@ -14,7 +14,7 @@ previously_corrected_guesses = []
 df = pandas.read_csv("./50_states.csv")
 states_list = df["state"].to_list()
 
-while previously_corrected_guesses < 50:
+while len(previously_corrected_guesses) < 50:
     answer = screen.textinput(title=f" {len(previously_corrected_guesses)}/50 Guess the state",
                               prompt="What is your next state's name?")
     answer_titled = answer.title()
