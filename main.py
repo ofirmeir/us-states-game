@@ -18,6 +18,18 @@ while len(previously_corrected_guesses) < 50:
     answer = screen.textinput(title=f" {len(previously_corrected_guesses)}/50 Guess the state",
                               prompt="What is your next state's name?")
     answer_titled = answer.title()
+    if answer_titled == "Exit":
+        # create a file of states that the user hasn't guessed
+        list_of_not_guessed = []
+        for state in states_list:
+            if state not in previously_corrected_guesses:
+                list_of_not_guessed.append(state)
+        not_guessed_dict = {
+            "name of not guessed state": list_of_not_guessed
+        }
+        df = pandas.DataFrame(not_guessed_dict)
+        df.to_csv("missing_states.csv")
+        break
     if answer_titled in states_list:
         if answer_titled not in previously_corrected_guesses:
             previously_corrected_guesses.append(answer_titled)
@@ -28,4 +40,5 @@ while len(previously_corrected_guesses) < 50:
             state_turtle.goto(int(state_df["x"]), int(state_df["y"]))
             state_turtle.write(answer_titled, align="center", font=FONT)
 
-screen.exitonclick()
+
+
