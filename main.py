@@ -20,10 +20,7 @@ while len(previously_corrected_guesses) < 50:
     answer_titled = answer.title()
     if answer_titled == "Exit":
         # create a file of states that the user hasn't guessed
-        list_of_not_guessed = []
-        for state in states_list:
-            if state not in previously_corrected_guesses:
-                list_of_not_guessed.append(state)
+        list_of_not_guessed = [state for state in states_list if state not in previously_corrected_guesses]
         not_guessed_dict = {
             "name of not guessed state": list_of_not_guessed
         }
